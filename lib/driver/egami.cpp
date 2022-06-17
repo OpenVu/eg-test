@@ -41,14 +41,14 @@ eEGAMI::eEGAMI()
 }
 
 /** detecting whether base is starts with str
- */
+ 
 bool eEGAMI::startsWith (const char* base, const char* str) 
 {
 	return (strstr(base, str) - base) == 0;
 }
 
-/** detecting whether base is ends with str
- */
+ detecting whether base is ends with str
+ 
 bool eEGAMI::endsWith (const char* base, const char* str) 
 {
 	int blen = strlen(base);
@@ -56,16 +56,29 @@ bool eEGAMI::endsWith (const char* base, const char* str)
 	return (blen >= slen) && (0 == strcmp(base + blen - slen, str));
 }
 
-/**
+
 * Check if a file exist using stat() function
 * return 1 if the file exist otherwise return 0
-*/
+
 bool eEGAMI::fileExists(const char *filename) 
 {
 	std::ifstream ifile(filename);
 	return (bool)ifile;
 }
-
+*/
+bool eEGAMI::FileExists(const string& file)
+{
+    std::ifstream in(file);
+    if (in)
+    {
+        in.close();
+        return true;
+    }
+    else
+    {
+        return false
+    }
+}	
 
 bool eEGAMI::checkkernel()		
 {	
