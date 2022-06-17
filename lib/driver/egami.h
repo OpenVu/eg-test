@@ -19,9 +19,9 @@ public:
 #endif	
 	//eEGAMI();
 	static eEGAMI *getInstance();
-	bool fileExists(const char *filename);
-	bool endsWith(const char* base, const char* str);
-	bool startsWith(const char* base, const char* str);
+	bool FileExists(const string& file);
+	//bool endsWith(const char* base, const char* str);
+	//bool startsWith(const char* base, const char* str);
 	//char* ReadProcEntry(const char *filename);
 	bool checkkernel();
 };
