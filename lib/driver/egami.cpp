@@ -78,5 +78,6 @@ bool eEGAMI::checkkernel()
 	{
 		sync();
 		reboot(RB_AUTOBOOT);
+		return 0;
 	}
 }
