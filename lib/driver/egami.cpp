@@ -42,14 +42,14 @@ eEGAMI::eEGAMI()
 
 /** detecting whether base is starts with str
  */
-bool eEGAMI::startsWith (char* base, char* str) 
+bool eEGAMI::startsWith (const char* base, const char* str) 
 {
 	return (strstr(base, str) - base) == 0;
 }
 
 /** detecting whether base is ends with str
  */
-bool eEGAMI::endsWith (char* base, char* str) 
+bool eEGAMI::endsWith (const char* base, const char* str) 
 {
 	int blen = strlen(base);
 	int slen = strlen(str);
@@ -68,11 +68,11 @@ bool eEGAMI::fileExists(const char *filename)
 
 /** reading file and return value from it
  * */
-char* eEGAMI::ReadProcEntry(char *filename)
+char* eEGAMI::ReadProcEntry(const char *filename)
 {
 	FILE *boxtype_file = fopen(filename,"r");
-	char boxtype_name[30];
-	char *real_boxtype_name = NULL;
+	const char boxtype_name[30];
+	const char *real_boxtype_name = NULL;
 	char c;
 	int i = 0;
 	
