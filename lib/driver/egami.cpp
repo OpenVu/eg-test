@@ -66,47 +66,10 @@ bool eEGAMI::fileExists(const char *filename)
 	return (bool)ifile;
 }
 
-/** reading file and return value from it
- * */
-char* eEGAMI::ReadProcEntry(const char *filename)
-{
-	FILE *boxtype_file = fopen(filename,"r");
-	const char boxtype_name[30];
-	const char *real_boxtype_name = NULL;
-	char c;
-	int i = 0;
-	
-	if(boxtype_file)
-	{
-		while ((c = fgetc(boxtype_file)) != EOF && i < sizeof(boxtype_name) - 2)
-		{
-			if (c == '\n')
-			{
-				i--;
-				break;
-			}
-			boxtype_name[i] = c;
-			i++;
-		}
-		boxtype_name[i+1] = '\0';
-		real_boxtype_name = (char*)malloc(strlen(boxtype_name) + 1);
-		if (real_boxtype_name)
-			strcpy(real_boxtype_name, boxtype_name);
-		
-		fclose(boxtype_file);
-	}
-	else
-	{
-		puts("[EGAMI] ERROR\n");
-		return("Unknown");
-	}
-	
-	return real_boxtype_name;
-}
 
 bool eEGAMI::checkkernel()		
-{
-	if(fileExists("/bin/emud"))
+{	
+	if(fileExists("/etc/hostname"))
 	{
 		eDebug("[EGAMI] Starting EGAMI OS...");
 	}
@@ -115,87 +78,4 @@ bool eEGAMI::checkkernel()
 		sync();
 		reboot(RB_AUTOBOOT);
 	}
-	
-	char *boxtype_name = NULL;
-	char *vuboxtype_name = NULL;
-	char *boxmodel_name = NULL;
-	boxtype_name = ReadProcEntry("/proc/stb/info/boxtype");
-	vuboxtype_name = ReadProcEntry("/proc/stb/info/vumodel");
-	boxmodel_name = ReadProcEntry("/proc/stb/info/model");
-	if (((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "lx"))) || ((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "de"))))
-	{
-		puts("[EGAMI] Golden Interstar\n");
-	}
-	else if((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "sv")))
-	{
-		puts("[EGAMI] Miraclebox\n");
-	}
-	else if((startsWith(boxtype_name, "7000")) || (startsWith(boxtype_name, "7100")) || (startsWith(boxtype_name, "7300")) || (startsWith(boxtype_name, "7400")))
-	{
-		puts("[EGAMI] Ceryon\n");
-	}
-	else if(startsWith(boxtype_name, "g300"))
-	{
-		puts("[EGAMI] BroadMedia\n");
-	}
-	else if((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "ru")))
-	{
-		puts("[EGAMI] Sezam\n");
-	}
-	else if((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "am")))
-	{
-		puts("[EGAMI] Atemio\n");
-	}
-	else if((startsWith(boxtype_name, "ini")) && (endsWith(boxtype_name, "au")))
-	{
-		puts("[EGAMI] Beyonwiz\n");
-	}
-	else if((startsWith(boxtype_name, "ini")) || (startsWith(boxtype_name, "uni")))
-	{
-		puts("[EGAMI] UNiBOX\n");
-	}
-	else if(startsWith(boxtype_name, "ini"))
-	{
-		puts("[EGAMI] INI-OEM\n");
-	}
-	else if(startsWith(boxtype_name, "yhgd5034"))
-	{
-		puts("[EGAMI] INI-OEM 5034\n");
-	}
-	else if(startsWith(boxtype_name, "yhgd2580"))
-	{
-		puts("[EGAMI] INI-OEM 2584\n");
-	}
-	/*else if(startsWith(boxtype_name, "h"))
-	{
-		puts("[EGAMI] Zgemma H Series\n");
-	}*/
-	else if(startsWith(boxtype_name, "hd"))
-	{
-		puts("[EGAMI] SkyLake\n");
-	}
-	else if(startsWith(vuboxtype_name, "solo4"))
-	{
-		puts("[EGAMI] Solo4K\n");
-	}
-	else if(startsWith(vuboxtype_name, "solo2"))
-	{
-		puts("[EGAMI] Solo2\n");
-	}
-	else if(startsWith(vuboxtype_name, "zer"))
-	{
-		puts("[EGAMI] Zero4K\n");
-	}
-	else if(startsWith(boxmodel_name, "wetek"))
-	{
-		puts("[EGAMI] Wetek\n");
-	}
-	else
-	{
-		puts("[EGAMI] The Evolved Image...\n");
-		sync();
-		reboot(RB_AUTOBOOT);
-		//reboot(RB_POWER_OFF);
-	}
-
 }
