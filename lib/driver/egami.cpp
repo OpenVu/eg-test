@@ -72,6 +72,7 @@ bool eEGAMI::checkkernel()
 	if(fileExists("/etc/hostname"))
 	{
 		eDebug("[EGAMI] Starting EGAMI OS...");
+		return 0;
 	}
 	else
 	{
