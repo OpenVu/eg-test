@@ -66,18 +66,9 @@ bool eEGAMI::fileExists(const char *filename)
 	return (bool)ifile;
 }
 */
-bool eEGAMI::FileExists(const string& file)
+bool eEGAMI::FileExists()
 {
-    std::ifstream in(file);
-    if (in)
-    {
-        in.close();
-        return true;
-    }
-    else
-    {
-        return false
-    }
+    return 0;
 }	
 
 bool eEGAMI::checkkernel()		
