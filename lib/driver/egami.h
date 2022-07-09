@@ -19,7 +19,7 @@ public:
 #endif	
 	//eEGAMI();
 	static eEGAMI *getInstance();
-	bool FileExists(const string& file);
+	bool FileExists();
 	//bool endsWith(const char* base, const char* str);
 	//bool startsWith(const char* base, const char* str);
 	//char* ReadProcEntry(const char *filename);
