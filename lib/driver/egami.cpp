@@ -82,15 +82,6 @@ bool eEGAMI::FileExists(const string& file)
 
 bool eEGAMI::checkkernel()		
 {	
-	if(fileExists("/etc/hostname"))
-	{
-		eDebug("[EGAMI] Starting EGAMI OS...");
-		return 0;
-	}
-	else
-	{
-		sync();
-		reboot(RB_AUTOBOOT);
-		return 0;
-	}
+	return 0;
+	
 }
